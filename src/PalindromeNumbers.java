@@ -6,27 +6,28 @@ public class PalindromeNumbers {
 		
 		Solution solution = new Solution();
 		
-		System.out.println(solution.isPalindrome(112));
+		System.out.println(solution.isPalindrome(21312));
 		
 	}
 	
 	static class Solution {
 	    public boolean isPalindrome(int x) {
+	    	
+	    	// Check for negative numbers and numbers ending with 0 (excluding 0)
+	    	 if (x < 0 || (x != 0 && x % 10 == 0)) {
+	             return false;
+	         }
 	        
-	    	String str = Integer.toString(x);
+	    	int reversedSecondHalf = 0;
 	    	
-	    	int left = 0;
-	    	int right = str.length() - 1;
-	    	
-	    	while(left < right) {
-	    		if(str.charAt(left) != str.charAt(right)) {
-	    			return false;
-	    		}
-	    		left ++;
-	    		right --;
+	    	// reverse second half of number
+	    	while (x > reversedSecondHalf) {
+	    		reversedSecondHalf = reversedSecondHalf * 10 + x % 10;
+	            x /= 10;
 	    	}
 	    	
-	    	return true;
+	    	// compare it with the first half
+	    	return (x == reversedSecondHalf || x == reversedSecondHalf / 10);
 	    }
 	}
 
